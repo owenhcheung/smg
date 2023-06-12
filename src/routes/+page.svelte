@@ -15,7 +15,6 @@
 		const data = await response.json()
 
 		set1 = data
-		console.log(set)
 	})
 </script>
 
@@ -32,7 +31,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<Player name={'test'} weapon={set1.weapon} body={set1.body} />
+				<Player
+					name={'test'}
+					weapon={set1.weapon}
+					body={set1.body}
+					link={'https://etro.gg/gearset/1103c082-1c80-4bf3-bb56-83734971d5ea'}
+				/>
 				<Player weapon={set1.weapon} head={set1.head} body={set1.body} />
 				<Player name={'test'} weapon={set1.weapon} head={set1.head} body={set1.body} />
 			</tbody>
