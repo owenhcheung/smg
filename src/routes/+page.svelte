@@ -1,21 +1,31 @@
-<!-- <script context="module">
-</script> -->
+<script context="module">
+</script>
 
 <script>
 	import { onMount } from 'svelte'
 	import Player from '../lib/Player.svelte'
 
-	let id = '1103c082-1c80-4bf3-bb56-83734971d5ea'
-	const endpoint = 'https://etro.gg/api/gearsets/' + id
+	let gearsetId = ['1103c082-1c80-4bf3-bb56-83734971d5ea', 'f2426d1e-2da8-4151-bf52-74ca67b5f4a2']
+	const gearsetURL = 'https://etro.gg/gearset/'
+	const gearsetEndpoint = 'https://etro.gg/api/gearsets/'
+	const equipmentEndpoint = 'https://etro.gg/api/equipment/'
 
-	export let set1 = []
+	export let gearsets = new Map()
+	//export let weapons = []
 
-	onMount(async function () {
-		const response = await fetch(endpoint)
-		const data = await response.json()
+	async function populateGearsets() {
+		await Promise.all(
+			gearsetId.map(async gearsetId => {
+				const response = await fetch(gearsetEndpoint + gearsetId)
+				const data = await response.json()
 
-		set1 = data
-	})
+				gearsets.set(gearsetId, data)
+			})
+		)
+		return gearsets
+	}
+
+	let promise = populateGearsets()
 </script>
 
 <div class="flex w-screen h-screen p-20">
@@ -31,14 +41,23 @@
 				</tr>
 			</thead>
 			<tbody>
-				<Player
-					name={'test'}
-					weapon={set1.weapon}
-					body={set1.body}
-					link={'https://etro.gg/gearset/1103c082-1c80-4bf3-bb56-83734971d5ea'}
-				/>
-				<Player weapon={set1.weapon} head={set1.head} body={set1.body} />
-				<Player name={'test'} weapon={set1.weapon} head={set1.head} body={set1.body} />
+				{#await promise}
+					<p>...waiting</p>
+				{:then gearsets}
+					<Player
+						name={'Warrior'}
+						link={'https://etro.gg/gearset/1103c082-1c80-4bf3-bb56-83734971d5ea'}
+						weapon={gearsets.get(gearsetId[0]).weapon}
+						body={gearsets.get(gearsetId[0]).body}
+					/>
+					<Player
+						name={'Bard'}
+						weapon={gearsets.get(gearsetId[1]).weapon}
+						body={gearsets.get(gearsetId[1]).body}
+					/>
+				{:catch error}
+					<p style="color: red">{error.message}</p>
+				{/await}
 			</tbody>
 		</table>
 	</div>
