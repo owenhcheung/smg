@@ -1,20 +1,27 @@
-<!-- <script context="module">
-</script> -->
+<script context="module">
+</script>
 
 <script>
 	import { onMount } from 'svelte'
 
-	let id = '1103c082-1c80-4bf3-bb56-83734971d5ea'
-	const endpoint = 'https://etro.gg/api/gearsets/' + id
+	let gearsetId = ['1103c082-1c80-4bf3-bb56-83734971d5ea', 'f2426d1e-2da8-4151-bf52-74ca67b5f4a2']
+	const gearsetEndpoint = 'https://etro.gg/api/gearsets/'
+	const equipmentEndpoint = 'https://etro.gg/api/equipment/'
 
-	export let set1 = []
+	export let gearsets = new Map()
+	//export let weapons = []
 
-	onMount(async function () {
-		const response = await fetch(endpoint)
-		const data = await response.json()
+	onMount(async () => {
+		//const files = await getFilePaths();
 
-		set1 = data
-		console.log(set)
+		await Promise.all(
+			gearsetId.map(async gearsetId => {
+				const response = await fetch(gearsetEndpoint + gearsetId)
+				const data = await response.json()
+
+				gearsets.set(gearsetId, data)
+			})
+		).then(console.log(gearsets))
 	})
 </script>
 
@@ -32,15 +39,9 @@
 			<tbody>
 				<tr>
 					<td class="border px-8 py-4">Player 1</td>
-					<td class="border px-8 py-4">{set1.weapon}</td>
-					<td class="border px-8 py-4">{set1.head}</td>
-					<td class="border px-8 py-4">{set1.body}</td>
-				</tr>
-				<tr>
-					<td class="border px-8 py-4">Player 2</td>
-					<td class="border px-8 py-4">{set1.weapon}</td>
-					<td class="border px-8 py-4">{set1.head}</td>
-					<td class="border px-8 py-4">{set1.body}</td>
+					<td class="border px-8 py-4">{gearsets[0]}</td>
+					<td class="border px-8 py-4">{gearsets}</td>
+					<td class="border px-8 py-4">{gearsets}</td>
 				</tr>
 			</tbody>
 		</table>
