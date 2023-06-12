@@ -31,49 +31,13 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td class="border px-8 py-4">Cat Naps</td>
+					<td class="border px-8 py-4">Player 1</td>
 					<td class="border px-8 py-4">{set1.weapon}</td>
 					<td class="border px-8 py-4">{set1.head}</td>
 					<td class="border px-8 py-4">{set1.body}</td>
 				</tr>
 				<tr>
-					<td class="border px-8 py-4">Lynx Zen</td>
-					<td class="border px-8 py-4">{set1.weapon}</td>
-					<td class="border px-8 py-4">{set1.head}</td>
-					<td class="border px-8 py-4">{set1.body}</td>
-				</tr>
-				<tr>
-					<td class="border px-8 py-4">Hannah Ocoenia</td>
-					<td class="border px-8 py-4">{set1.weapon}</td>
-					<td class="border px-8 py-4">{set1.head}</td>
-					<td class="border px-8 py-4">{set1.body}</td>
-				</tr>
-				<tr>
-					<td class="border px-8 py-4">Ariandel Vath'os</td>
-					<td class="border px-8 py-4">{set1.weapon}</td>
-					<td class="border px-8 py-4">{set1.head}</td>
-					<td class="border px-8 py-4">{set1.body}</td>
-				</tr>
-				<tr>
-					<td class="border px-8 py-4">Blitzy Chitz</td>
-					<td class="border px-8 py-4">{set1.weapon}</td>
-					<td class="border px-8 py-4">{set1.head}</td>
-					<td class="border px-8 py-4">{set1.body}</td>
-				</tr>
-				<tr>
-					<td class="border px-8 py-4">Yashigaki Sageru</td>
-					<td class="border px-8 py-4">{set1.weapon}</td>
-					<td class="border px-8 py-4">{set1.head}</td>
-					<td class="border px-8 py-4">{set1.body}</td>
-				</tr>
-				<tr>
-					<td class="border px-8 py-4">Kottairi Mattoi</td>
-					<td class="border px-8 py-4">{set1.weapon}</td>
-					<td class="border px-8 py-4">{set1.head}</td>
-					<td class="border px-8 py-4">{set1.body}</td>
-				</tr>
-				<tr>
-					<td class="border px-8 py-4">Aeleus Pendragon</td>
+					<td class="border px-8 py-4">Player 2</td>
 					<td class="border px-8 py-4">{set1.weapon}</td>
 					<td class="border px-8 py-4">{set1.head}</td>
 					<td class="border px-8 py-4">{set1.body}</td>
