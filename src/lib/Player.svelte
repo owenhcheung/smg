@@ -13,7 +13,7 @@
 			<p class="mr-5">{name}</p>
 			<input
 				type="text"
-				class="bg-stone-200 text-neutral-500 focus:text-black py-1 px-3 truncate focus:outline-none w-32"
+				class="bg-stone-200 text-neutral-500 focus:text-black py-1 px-3 truncate focus:outline-none w-36"
 				bind:value={link}
 			/>
 		</div>

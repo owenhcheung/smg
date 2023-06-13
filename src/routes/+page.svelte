@@ -5,7 +5,8 @@
 	import { onMount } from 'svelte'
 	import Player from '../lib/Player.svelte'
 
-	let gearsetId = ['1103c082-1c80-4bf3-bb56-83734971d5ea', 'f2426d1e-2da8-4151-bf52-74ca67b5f4a2']
+	let gearsetId = ['f2426d1e-2da8-4151-bf52-74ca67b5f4a2']
+
 	const gearsetURL = 'https://etro.gg/gearset/'
 	const gearsetEndpoint = 'https://etro.gg/api/gearsets/'
 	const equipmentEndpoint = 'https://etro.gg/api/equipment/'
@@ -42,7 +43,11 @@
 			</thead>
 			<tbody>
 				{#await promise}
-					<p>...waiting</p>
+					<tr class="border">
+						<td class="px-8 py-4">
+							<p>Loading...</p>
+						</td>
+					</tr>
 				{:then gearsets}
 					<Player
 						name={'Warrior'}
@@ -52,11 +57,11 @@
 					/>
 					<Player
 						name={'Bard'}
-						weapon={gearsets.get(gearsetId[1]).weapon}
-						body={gearsets.get(gearsetId[1]).body}
+						weapon={gearsets.get(gearsetId[0]).weapon}
+						body={gearsets.get(gearsetId[0]).body}
 					/>
 				{:catch error}
-					<p style="color: red">{error.message}</p>
+					<p class="text-red">{error.message}</p>
 				{/await}
 			</tbody>
 		</table>
