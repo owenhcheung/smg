@@ -70,7 +70,11 @@
 			</thead>
 			<tbody>
 				{#await promise}
-					<p>...waiting</p>
+					<tr class="border">
+						<td class="px-8 py-4">
+							<p>Loading...</p>
+						</td>
+					</tr>
 				{:then gearsets}
 					{#each gearsetId as i}
 						<Player
@@ -91,7 +95,7 @@
 						/>
 					{/each}
 				{:catch error}
-					<p style="color: red">{error.message}</p>
+					<p class="text-red">{error.message}</p>
 				{/await}
 			</tbody>
 		</table>
