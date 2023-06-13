@@ -2,30 +2,58 @@
 </script>
 
 <script>
-	import { onMount } from 'svelte'
 	import Player from '../lib/Player.svelte'
 
-	let gearsetId = ['1103c082-1c80-4bf3-bb56-83734971d5ea', 'f2426d1e-2da8-4151-bf52-74ca67b5f4a2']
+	let gearsetId = '1103c082-1c80-4bf3-bb56-83734971d5ea'
+	export let itemId = []
 	const gearsetURL = 'https://etro.gg/gearset/'
 	const gearsetEndpoint = 'https://etro.gg/api/gearsets/'
-	const equipmentEndpoint = 'https://etro.gg/api/equipment/'
+	const itemEndpoint = 'https://etro.gg/api/equipment/'
 
-	export let gearsets = new Map()
-	//export let weapons = []
+	export let gearset = new Map()
+	export let items = new Map()
 
-	async function populateGearsets() {
+	async function populateGearset() {
+		// grabs gearset and maps json response to gearsetID
+		const response = await fetch(gearsetEndpoint + gearsetId)
+		const data = await response.json()
+
+		gearset.set(gearsetId, data)
+
+		// populates an array of all itemIds needed based on the json data (without duplicates)
+		let set = [
+			data.weapon,
+			data.head,
+			data.body,
+			data.hands,
+			data.legs,
+			data.feet,
+			data.offHand,
+			data.ears,
+			data.neck,
+			data.wrists,
+			data.fingerL,
+			data.fingerR
+		]
+
+		set.forEach(item => {
+			if (item != null && !itemId.includes(item)) {
+				itemId.push(item)
+			}
+		})
+		return gearset
+
 		await Promise.all(
-			gearsetId.map(async gearsetId => {
-				const response = await fetch(gearsetEndpoint + gearsetId)
+			itemId.map(async itemId => {
+				const response = await fetch(itemEndpoint + itemId)
 				const data = await response.json()
 
-				gearsets.set(gearsetId, data)
+				items.set(itemId, data)
 			})
 		)
-		return gearsets
 	}
 
-	let promise = populateGearsets()
+	let promise1 = populateGearset()
 </script>
 
 <div class="flex w-screen h-screen p-20">
@@ -44,18 +72,24 @@
 				{#await promise}
 					<p>...waiting</p>
 				{:then gearsets}
-					<Player
-						name={'Warrior'}
-						link={gearsetURL + gearsetId[0]}
-						weapon={gearsets.get(gearsetId[0]).weapon}
-						body={gearsets.get(gearsetId[0]).body}
-					/>
-					<Player
-						name={'Bard'}
-						link={gearsetURL + gearsetId[1]}
-						weapon={gearsets.get(gearsetId[1]).weapon}
-						body={gearsets.get(gearsetId[1]).body}
-					/>
+					{#each gearsetId as i}
+						<Player
+							name={i}
+							link={gearsetURL + i}
+							weapon={items.get(gearsets.get(i).weapon).name}
+							head={items.get(gearsets.get(i).head).name}
+							body={items.get(gearsets.get(i).body).name}
+							hands={items.get(gearsets.get(i).hands).name}
+							legs={items.get(gearsets.get(i).legs).name}
+							feet={items.get(gearsets.get(i).feet).name}
+							offHand={items.get(gearsets.get(i).offHand).name}
+							ears={items.get(gearsets.get(i).ears).name}
+							neck={items.get(gearsets.get(i).neck).name}
+							wrists={items.get(gearsets.get(i).wrists).name}
+							fingerL={items.get(gearsets.get(i).fingerL).name}
+							fingerR={items.get(gearsets.get(i).fingerR).name}
+						/>
+					{/each}
 				{:catch error}
 					<p style="color: red">{error.message}</p>
 				{/await}
