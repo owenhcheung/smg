@@ -5,6 +5,8 @@
 	export let body = 'body name'
 
 	export let link = 'input gearset'
+
+	let id = link.replace(/\/\/*/g, '/').replace(/\/+$/, '').slice(23) // remove any trailing slash + get id
 </script>
 
 <tr>

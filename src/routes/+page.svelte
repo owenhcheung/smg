@@ -52,14 +52,8 @@
 					<Player
 						name={'Warrior'}
 						link={'https://etro.gg/gearset/1103c082-1c80-4bf3-bb56-83734971d5ea'}
-						weapon={gearsets.get(gearsetId[0]).weapon}
-						body={gearsets.get(gearsetId[0]).body}
 					/>
-					<Player
-						name={'Bard'}
-						weapon={gearsets.get(gearsetId[0]).weapon}
-						body={gearsets.get(gearsetId[0]).body}
-					/>
+					<Player name={'Bard'} />
 				{:catch error}
 					<p class="text-red">{error.message}</p>
 				{/await}
