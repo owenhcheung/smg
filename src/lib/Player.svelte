@@ -16,32 +16,18 @@
 			const response = await fetch(gearset)
 			const data = await response.json()
 
-			const {
-				weapon: weaponID,
-				head: headID,
-				body: bodyID,
-				hands: handID,
-				legs: legID,
-				feet: feetID,
-				ears: earID,
-				neck: neckID,
-				wrists: wristID,
-				fingerL: ringLID,
-				fingerR: ringRID
-			} = data
-
 			return [
-				weaponID,
-				headID,
-				bodyID,
-				handID,
-				legID,
-				feetID,
-				earID,
-				neckID,
-				wristID,
-				ringLID,
-				ringRID
+				data.weapon,
+				data.head,
+				data.body,
+				data.hands,
+				data.legs,
+				data.feet,
+				data.ears,
+				data.neck,
+				data.wrists,
+				data.fingerL,
+				data.fingerR
 			]
 		} catch (error) {
 			console.error('something fucked up', error.message, error.stack)
@@ -60,6 +46,7 @@
 		if (gearsetLink) {
 			let temp = []
 			fetchGearset(gearsetEndpoint).then(gearset => {
+				console.log(gearset)
 				gearset.forEach(id =>
 					fetchItemName(equipmentEndpoint + id).then(name => {
 						temp.push(name)
